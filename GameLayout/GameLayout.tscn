@@ -1,38 +1,39 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://GamePlay/game_rules.gd" type="Script" id=2]
+[ext_resource path="res://GameLayout/PointsGainedDisplayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=1]
 size = 52
 outline_size = 1
 outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=13]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=14]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=15]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=5]
 size = 30
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=17]
+[sub_resource type="DynamicFont" id=6]
 size = 18
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.913725, 0.72549, 0.160784, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -42,14 +43,14 @@ shadow_color = Color( 1, 0.984314, 0, 0.6 )
 shadow_size = 5
 shadow_offset = Vector2( 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=19]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.913725, 0.72549, 0.160784, 1 )
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[sub_resource type="StyleBoxFlat" id=20]
+[sub_resource type="StyleBoxFlat" id=9]
 content_margin_left = 9.0
 content_margin_right = 9.0
 bg_color = Color( 0.741176, 0.588235, 0.129412, 1 )
@@ -59,12 +60,72 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color( 0.690196, 0.678431, 0.678431, 0.6 )
 
-[sub_resource type="DynamicFont" id=21]
+[sub_resource type="DynamicFont" id=10]
 size = 17
 use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="Theme" id=11]
+
+[sub_resource type="DynamicFont" id=12]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=20]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 50
+outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
+use_filter = true
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=22]
 size = 50
@@ -102,66 +163,6 @@ outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 use_filter = true
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=28]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=29]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=30]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=31]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=32]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=33]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=34]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=35]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=36]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
-[sub_resource type="DynamicFont" id=37]
-size = 50
-outline_color = Color( 0.466667, 0.431373, 0.396078, 1 )
-use_filter = true
-font_data = ExtResource( 4 )
-
 [node name="Screen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -169,6 +170,10 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PointsGainedDisplayer" parent="." instance=ExtResource( 3 )]
+margin_right = 148.0
+margin_bottom = 67.0
 
 [node name="ScreenBG" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -212,7 +217,7 @@ margin_right = 156.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 6
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2048"
 valign = 1
@@ -241,7 +246,7 @@ __meta__ = {
 [node name="ScoreTextLabel" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/HeaderHBox/ScoresHBox/ScoreBG/ScoreVBox"]
 margin_right = 120.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.92549, 0.894118, 0.85098, 1 )
 text = "Pontuação"
 align = 1
@@ -251,7 +256,7 @@ valign = 1
 margin_top = 27.0
 margin_right = 120.0
 margin_bottom = 69.0
-custom_fonts/font = SubResource( 14 )
+custom_fonts/font = SubResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -275,7 +280,7 @@ __meta__ = {
 [node name="HighScoreTextLabel" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/HeaderHBox/ScoresHBox/HighScoreBG/HighScoreVBox"]
 margin_right = 120.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0.92549, 0.894118, 0.85098, 1 )
 text = "Recorde"
 align = 1
@@ -288,7 +293,7 @@ __meta__ = {
 margin_top = 27.0
 margin_right = 120.0
 margin_bottom = 69.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 5 )
 text = "10500"
 align = 1
 valign = 1
@@ -305,7 +310,7 @@ margin_right = 313.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = SubResource( 17 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.466667, 0.392157, 0.2, 1 )
 text = "Junte as peças. Chegue a 2048!"
 valign = 1
@@ -315,10 +320,10 @@ margin_left = 313.0
 margin_right = 410.0
 margin_bottom = 26.0
 size_flags_vertical = 3
-custom_styles/hover = SubResource( 18 )
-custom_styles/pressed = SubResource( 19 )
-custom_styles/normal = SubResource( 20 )
-custom_fonts/font = SubResource( 21 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_hover = Color( 1, 1, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
@@ -357,7 +362,7 @@ __meta__ = {
 [node name="0-0Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/0-0BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 12 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -384,7 +389,7 @@ __meta__ = {
 [node name="0-1Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/0-1BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 13 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "4"
 align = 1
@@ -411,7 +416,7 @@ __meta__ = {
 [node name="0-2Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/0-2BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 24 )
+custom_fonts/font = SubResource( 14 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -435,7 +440,7 @@ __meta__ = {
 [node name="0-3Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/0-3BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 25 )
+custom_fonts/font = SubResource( 15 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -462,7 +467,7 @@ __meta__ = {
 [node name="1-0Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/1-0BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 26 )
+custom_fonts/font = SubResource( 16 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -489,7 +494,7 @@ __meta__ = {
 [node name="1-1Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/1-1BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 27 )
+custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -516,7 +521,7 @@ __meta__ = {
 [node name="1-2Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/1-2BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 28 )
+custom_fonts/font = SubResource( 18 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -543,7 +548,7 @@ __meta__ = {
 [node name="1-3Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/1-3BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 29 )
+custom_fonts/font = SubResource( 19 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -570,7 +575,7 @@ __meta__ = {
 [node name="2-0Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/2-0BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 30 )
+custom_fonts/font = SubResource( 20 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -597,7 +602,7 @@ __meta__ = {
 [node name="2-1Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/2-1BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 31 )
+custom_fonts/font = SubResource( 21 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -624,7 +629,7 @@ __meta__ = {
 [node name="2-2Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/2-2BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 32 )
+custom_fonts/font = SubResource( 22 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -651,7 +656,7 @@ __meta__ = {
 [node name="2-3Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/2-3BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 33 )
+custom_fonts/font = SubResource( 23 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -678,7 +683,7 @@ __meta__ = {
 [node name="3-0Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/3-0BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 34 )
+custom_fonts/font = SubResource( 24 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -705,7 +710,7 @@ __meta__ = {
 [node name="3-1Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/3-1BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 35 )
+custom_fonts/font = SubResource( 25 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -732,7 +737,7 @@ __meta__ = {
 [node name="3-2Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/3-2BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 36 )
+custom_fonts/font = SubResource( 26 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "2"
 align = 1
@@ -759,7 +764,7 @@ __meta__ = {
 [node name="3-3Text" type="Label" parent="ScreenBG/ScreenMargin/ScreenVBox/GameCenter/GameBG/3-3BG"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 37 )
+custom_fonts/font = SubResource( 27 )
 custom_colors/font_color = Color( 0.466667, 0.431373, 0.396078, 1 )
 text = "256"
 align = 1

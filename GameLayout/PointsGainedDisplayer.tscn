@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://PointsGainedDisplayer.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+size = 24
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "show_points"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 50 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 37
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="PointsGainedDisplayer" type="Control"]
+margin_right = 450.0
+margin_bottom = 600.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_right = 450.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 2 )
+text = "+16"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="AnimationPlayer" parent="."]
+anims/show_points = SubResource( 1 )
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 141.111
+margin_top = 277.183
+margin_right = 273.111
+margin_bottom = 328.183
+custom_fonts/font = SubResource( 3 )
+text = "aaaaaa"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="Player" to="." method="_on_Palyer_animation_finished"]

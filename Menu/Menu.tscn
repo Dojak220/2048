@@ -1,11 +1,50 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Menu/menu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Open_Sans/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts/Open_Sans/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 87
+outline_size = 3
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 3 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.458824, 0.737255, 0.392157, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -31,46 +70,54 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
-margin_left = 159.0
-margin_top = 83.0
-margin_right = 251.0
-margin_bottom = 477.0
+margin_left = 105.0
+margin_top = 11.0
+margin_right = 305.0
+margin_bottom = 549.0
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_right = 92.0
-margin_bottom = 314.0
+margin_right = 200.0
+margin_bottom = 419.0
 custom_constants/margin_bottom = 300
 
 [node name="GameName" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/MarginContainer"]
-margin_right = 92.0
-margin_bottom = 14.0
+anchor_top = 0.236277
+anchor_bottom = 0.236277
+margin_right = 200.0
+margin_bottom = 119.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0980392, 0.588235, 0.00392157, 1 )
+custom_colors/font_outline_modulate = Color( 0.278431, 0.168627, 0.0705882, 1 )
 text = "2048"
 align = 1
 valign = 1
 
 [node name="PlayerNameTextEdit" type="TextEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 334.0
-margin_right = 92.0
-margin_bottom = 354.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 0, 20 )
+margin_top = 439.0
+margin_right = 200.0
+margin_bottom = 479.0
+rect_min_size = Vector2( 0, 40 )
+custom_fonts/font = SubResource( 5 )
 text = "Player"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+draw_spaces = true
+override_selected_font_color = true
 
 [node name="StartButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 374.0
-margin_right = 92.0
-margin_bottom = 394.0
+margin_top = 499.0
+margin_right = 200.0
+margin_bottom = 538.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.0980392, 0.588235, 0.00392157, 1 )
+custom_colors/font_color_hover = Color( 0.0980392, 0.588235, 0.00392157, 1 )
+custom_colors/font_color_pressed = Color( 0.101961, 0.588235, 0, 0.745098 )
 text = "START GAME"
 __meta__ = {
 "_edit_use_anchors_": false

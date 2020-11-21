@@ -87,16 +87,17 @@ var score = 0
 
 # SIGNALS
 signal new_piece_inserted #unused for now
+signal game_over
 
 # FUNÇÕES
 func _ready():
 	occupation_map = create_map(MAP_SIZE, MAP_SIZE)
-	print_map()
+	print_map(occupation_map)
 	
 	insert_new_piece()
 	insert_new_piece()
 	
-	print_map()
+	print_map(occupation_map)
 
 func create_map(height, width):
 	var map = []
@@ -110,22 +111,20 @@ func create_map(height, width):
 			
 	return map
 
-func print_map():
+func print_map(map):
 	var line = ""
 	for i in range(MAP_SIZE):
 		for j in range(MAP_SIZE):
-			line = line + String(occupation_map[i][j].piece.value) + " "
+			line = line + String(map[i][j].piece.value) + " "
 		print("[ ", line, "]")
 		line = ""
 	print("")
 
 func insert_new_piece():
 	if is_fully_occupied():
-		return
+		print("Game Over")
 	
 	randomize()
-	
-	#get_child(snake_size+1).connect("body_hit", self, "_on_SnakeBody_hit")
 	
 	var Piece = PieceResource.instance()
 	Piece.set_global_position(Vector2(-1000,-1000))
@@ -142,7 +141,10 @@ func insert_new_piece():
 	occupation_map[line][column].piece.instance = Piece
 	
 	if is_fully_occupied():
-		print("Mapa cheio. Se não houver combinações possíveis... Game over")
+		if no_more_moves(occupation_map):
+			print("Game Over")
+		else:
+			print("Mapa cheio. Se não houver combinações possíveis... Game over")
 
 func is_fully_occupied():
 	var fully_occupied = true
@@ -155,110 +157,123 @@ func is_fully_occupied():
 func is_position_occupied(line, column):
 	return occupation_map[line][column].piece.value
 
+func no_more_moves(map):
+	var no_moves = true
+	
+	for i in range(MAP_SIZE-1): # [0, 1, 2]
+		for j in range(MAP_SIZE): # [0, 1, 2, 3]
+			if (occupation_map[i][j].piece.value == occupation_map[i+1][j].piece.value):
+				return !no_moves
+			if (occupation_map[j][i].piece.value == occupation_map[j][i+1].piece.value):
+				return !no_moves
+	
+	return no_moves
+
 func _unhandled_input(event):
 	for dir in INPUTS.keys():
 		if event.is_action_pressed(dir):
 			can_insert = false
-			update_map(dir);
+			occupation_map = update_map(dir, occupation_map);
 			if can_insert:
 				insert_new_piece()
 				map_changed = true
-			print_map()
+				print_map(occupation_map)
 
-func update_map(direction):
+func update_map(direction, map):
 	var x_aux
 	var y_aux
 
 	if direction == "ui_right":
 		for x in range(MAP_SIZE): # range: [0, 1, 2, 3]
 			for y in range(MAP_SIZE-2,-1,-1): # range: [2, 1, 0]
-				if (occupation_map[x][y].piece.value != 0):
+				if (map[x][y].piece.value != 0):
 					y_aux = y
-					while(y_aux < MAP_SIZE-1 && occupation_map[x][y_aux+1].piece.value == 0):
+					while(y_aux < MAP_SIZE-1 && map[x][y_aux+1].piece.value == 0):
 						y_aux += 1
-						occupation_map[x][y_aux].piece.value = occupation_map[x][y_aux-1].piece.value
-						occupation_map[x][y_aux].piece.instance = occupation_map[x][y_aux-1].piece.instance
-						occupation_map[x][y_aux-1].piece.value = 0
+						map[x][y_aux].piece.value = map[x][y_aux-1].piece.value
+						map[x][y_aux].piece.instance = map[x][y_aux-1].piece.instance
+						map[x][y_aux-1].piece.value = 0
 						can_insert = true
 					if (y_aux == MAP_SIZE-1):
 						continue
-					if (occupation_map[x][y_aux+1].clean && occupation_map[x][y_aux+1].piece.value == occupation_map[x][y_aux].piece.value):
-						occupation_map[x][y_aux+1].piece.value *= 2 # It's necessary to change this piece's label
-						occupation_map[x][y_aux+1].clean = false
-						occupation_map[x][y_aux].piece.value = 0 # It's necessary to uninstance this piece
-						occupation_map[x][y_aux].piece.instance.queue_free()
-						score += occupation_map[x][y_aux+1].piece.value
+					if (map[x][y_aux+1].clean && map[x][y_aux+1].piece.value == map[x][y_aux].piece.value):
+						map[x][y_aux+1].piece.value *= 2 # It's necessary to change this piece's label
+						map[x][y_aux+1].clean = false
+						map[x][y_aux].piece.value = 0 # It's necessary to uninstance this piece
+						map[x][y_aux].piece.instance.queue_free()
+						score += map[x][y_aux+1].piece.value
 						can_insert = true
 	
 	if direction == "ui_left":
 		for x in range(MAP_SIZE): # range: [0, 1, 2, 3]
 			for y in range(1, MAP_SIZE): # range: [1, 2, 3]
-				if (occupation_map[x][y].piece.value != 0):
+				if (map[x][y].piece.value != 0):
 					y_aux = y
-					while(y_aux > 0 && occupation_map[x][y_aux-1].piece.value == 0):
+					while(y_aux > 0 && map[x][y_aux-1].piece.value == 0):
 						y_aux -= 1
-						occupation_map[x][y_aux].piece.value = occupation_map[x][y_aux+1].piece.value
-						occupation_map[x][y_aux].piece.instance = occupation_map[x][y_aux+1].piece.instance
-						occupation_map[x][y_aux+1].piece.value = 0
+						map[x][y_aux].piece.value = map[x][y_aux+1].piece.value
+						map[x][y_aux].piece.instance = map[x][y_aux+1].piece.instance
+						map[x][y_aux+1].piece.value = 0
 						can_insert = true
 					if (y_aux == 0):
 						continue
-					if (occupation_map[x][y_aux-1].clean && occupation_map[x][y_aux-1].piece.value == occupation_map[x][y_aux].piece.value):
-						occupation_map[x][y_aux-1].piece.value *= 2 # It's necessary to change this piece's label
-						occupation_map[x][y_aux-1].clean = false
-						occupation_map[x][y_aux].piece.value = 0 # It's necessary to uninstance this piece
-						occupation_map[x][y_aux].piece.instance.queue_free()
-						score += occupation_map[x][y_aux-1].piece.value
+					if (map[x][y_aux-1].clean && map[x][y_aux-1].piece.value == map[x][y_aux].piece.value):
+						map[x][y_aux-1].piece.value *= 2 # It's necessary to change this piece's label
+						map[x][y_aux-1].clean = false
+						map[x][y_aux].piece.value = 0 # It's necessary to uninstance this piece
+						map[x][y_aux].piece.instance.queue_free()
+						score += map[x][y_aux-1].piece.value
 						can_insert = true
 	
 	if direction == "ui_up":
 		for y in range(MAP_SIZE): # range: [0, 1, 2, 3]
 			for x in range(1, MAP_SIZE): # range: [1, 2, 3]
-				if (occupation_map[x][y].piece.value != 0):
+				if (map[x][y].piece.value != 0):
 					x_aux = x
-					while(x_aux > 0 && occupation_map[x_aux-1][y].piece.value == 0):
+					while(x_aux > 0 && map[x_aux-1][y].piece.value == 0):
 						x_aux -= 1
-						occupation_map[x_aux][y].piece.value = occupation_map[x_aux+1][y].piece.value
-						occupation_map[x_aux][y].piece.instance = occupation_map[x_aux+1][y].piece.instance
-						occupation_map[x_aux+1][y].piece.value = 0
+						map[x_aux][y].piece.value = map[x_aux+1][y].piece.value
+						map[x_aux][y].piece.instance = map[x_aux+1][y].piece.instance
+						map[x_aux+1][y].piece.value = 0
 						can_insert = true
 					if (x_aux == 0):
 						continue
-					if (occupation_map[x_aux-1][y].clean && occupation_map[x_aux-1][y].piece.value == occupation_map[x_aux][y].piece.value):
-						occupation_map[x_aux-1][y].piece.value *= 2 # It's necessary to change this piece's label
-						occupation_map[x_aux-1][y].clean = false
-						occupation_map[x_aux][y].piece.value = 0 # It's necessary to uninstance this piece
-						occupation_map[x_aux][y].piece.instance.queue_free()
-						score += occupation_map[x_aux-1][y].piece.value
+					if (map[x_aux-1][y].clean && map[x_aux-1][y].piece.value == map[x_aux][y].piece.value):
+						map[x_aux-1][y].piece.value *= 2 # It's necessary to change this piece's label
+						map[x_aux-1][y].clean = false
+						map[x_aux][y].piece.value = 0 # It's necessary to uninstance this piece
+						map[x_aux][y].piece.instance.queue_free()
+						score += map[x_aux-1][y].piece.value
 						can_insert = true
 	
 	if direction == "ui_down":
 		for y in range(MAP_SIZE): # range: [0, 1, 2, 3]
 			for x in range(MAP_SIZE-2,-1,-1): # range: [2, 1, 0]
-				if (occupation_map[x][y].piece.value != 0):
+				if (map[x][y].piece.value != 0):
 					x_aux = x
-					while(x_aux < MAP_SIZE-1 && occupation_map[x_aux+1][y].piece.value == 0):
+					while(x_aux < MAP_SIZE-1 && map[x_aux+1][y].piece.value == 0):
 						x_aux += 1
-						occupation_map[x_aux][y].piece.value = occupation_map[x_aux-1][y].piece.value
-						occupation_map[x_aux][y].piece.instance = occupation_map[x_aux-1][y].piece.instance
-						occupation_map[x_aux-1][y].piece.value = 0
+						map[x_aux][y].piece.value = map[x_aux-1][y].piece.value
+						map[x_aux][y].piece.instance = map[x_aux-1][y].piece.instance
+						map[x_aux-1][y].piece.value = 0
 						can_insert = true
 					if (x_aux == MAP_SIZE-1):
 						continue
-					if (occupation_map[x_aux+1][y].clean && occupation_map[x_aux+1][y].piece.value == occupation_map[x_aux][y].piece.value):
-						occupation_map[x_aux+1][y].piece.value *= 2 # It's necessary to change this piece's label
-						occupation_map[x_aux+1][y].clean = false
-						occupation_map[x_aux][y].piece.value = 0 # It's necessary to uninstance this piece
-						occupation_map[x_aux][y].piece.instance.queue_free()
-						score += occupation_map[x_aux+1][y].piece.value
+					if (map[x_aux+1][y].clean && map[x_aux+1][y].piece.value == map[x_aux][y].piece.value):
+						map[x_aux+1][y].piece.value *= 2 # It's necessary to change this piece's label
+						map[x_aux+1][y].clean = false
+						map[x_aux][y].piece.value = 0 # It's necessary to uninstance this piece
+						map[x_aux][y].piece.instance.queue_free()
+						score += map[x_aux+1][y].piece.value
 						can_insert = true
-	print(score)
-	clean_map()
+	clean_map(map)
+	
+	return map
 
-func clean_map():
+func clean_map(map):
 	for x in range(MAP_SIZE): # [0, 1, 2, 3]
-			for y in range(MAP_SIZE): # [0, 1, 2, 3]
-				occupation_map[x][y].clean = true
+		for y in range(MAP_SIZE): # [0, 1, 2, 3]
+			map[x][y].clean = true
 
 func update_screen():
 	var piece
@@ -271,7 +286,6 @@ func update_screen():
 	for i in range(MAP_SIZE):
 		for j in range(MAP_SIZE):
 			piece = occupation_map[i][j].piece
-			
 			if (piece.instance && piece.value):
 				piece_position = Vector2(j * PIECE_SIZE + (j+1) * PIECES_INTERSPACE, (i) * PIECE_SIZE + (i+1) * PIECES_INTERSPACE)
 				piece_text = String(piece.value)
@@ -282,8 +296,9 @@ func update_screen():
 				piece.instance.set_position(piece_position)
 				piece.instance.set_label(piece_text, piece_text_size, piece_text_color)
 				piece.instance.color = piece_bg
-
 	map_changed = false
+	
+	$"ScreenBG/ScreenMargin/ScreenVBox/HeaderHBox/ScoresHBox/ScoreBG/ScoreVBox/ScoreValueLabel".text = String(score)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

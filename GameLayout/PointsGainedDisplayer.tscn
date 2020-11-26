@@ -3,15 +3,14 @@
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://PointsGainedDisplayer.gd" type="Script" id=2]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 24
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "show_points"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:rect_position")
 tracks/0/interp = 1
@@ -53,14 +52,14 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 margin_right = 450.0
 margin_bottom = 600.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "+16"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Player" type="AnimationPlayer" parent="."]
-anims/show_points = SubResource( 1 )
+anims/show_points = SubResource( 2 )
 
 [node name="Label2" type="Label" parent="."]
 margin_left = 141.111

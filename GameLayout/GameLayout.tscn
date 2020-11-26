@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://GamePlay/game_rules.gd" type="Script" id=2]
+[ext_resource path="res://GameLayout/game_rules.gd" type="Script" id=2]
 [ext_resource path="res://GameLayout/PointsGainedDisplayer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=4]
 

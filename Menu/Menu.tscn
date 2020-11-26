@@ -11,25 +11,25 @@ outline_size = 3
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 size = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=5]
 size = 28
 font_data = ExtResource( 3 )
 
@@ -85,8 +85,6 @@ margin_bottom = 419.0
 custom_constants/margin_bottom = 300
 
 [node name="GameName" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/MarginContainer"]
-anchor_top = 0.236277
-anchor_bottom = 0.236277
 margin_right = 200.0
 margin_bottom = 119.0
 custom_fonts/font = SubResource( 1 )
@@ -101,7 +99,7 @@ margin_top = 439.0
 margin_right = 200.0
 margin_bottom = 479.0
 rect_min_size = Vector2( 0, 40 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Player"
 draw_spaces = true
 override_selected_font_color = true
@@ -112,9 +110,9 @@ margin_right = 200.0
 margin_bottom = 538.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_styles/hover = SubResource( 4 )
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color = Color( 0.0980392, 0.588235, 0.00392157, 1 )
 custom_colors/font_color_hover = Color( 0.0980392, 0.588235, 0.00392157, 1 )
 custom_colors/font_color_pressed = Color( 0.101961, 0.588235, 0, 0.745098 )

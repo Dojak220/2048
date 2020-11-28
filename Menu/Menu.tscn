@@ -1,42 +1,102 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://Menu/menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Bold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://fonts/Open_Sans/OpenSans-SemiBold.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://fonts/Open_Sans/OpenSans-Regular.ttf" type="DynamicFontData" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-size = 87
+[sub_resource type="GDScript" id=5]
+script/source = "extends Control
+
+var player_name = \"Jogador\"
+var textEdit
+var playersList
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	textEdit = $MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/PlayerNameTextEdit
+	playersList = $MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/PlayersList
+	textEdit.text = GameStats.currentPlayer.name
+	for player in GameStats.players:
+		playersList.add_item(player.name)
+	print(playersList.items)
+
+#	player_name.text = GameStats.playerName
+
+func _process(delta):
+	pass
+
+func _on_StartButton_pressed():
+	var response = GameStats.add_player(player_name)
+	if !response.status:
+		return
+	print(response.player)
+	get_tree().change_scene(\"res://GameLayout/GameLayout.tscn\")
+#	get_tree().change_scene(\"res://Game.tscn\")
+
+func _on_ItemList_item_selected(index):
+	textEdit.text = playersList.items[index]
+
+func _on_PlayerNameTextEdit_text_changed():
+	player_name = textEdit.text
+"
+
+[sub_resource type="DynamicFont" id=6]
+size = 86
 outline_size = 3
 use_filter = true
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
+size = 22
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
 size = 20
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="DynamicFont" id=4]
+size = 22
+outline_size = 2
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_left = 2.0
+content_margin_right = 2.0
 bg_color = Color( 0.901961, 0.901961, 0.901961, 1 )
+border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=9]
+content_margin_left = 2.0
+content_margin_right = 2.0
 bg_color = Color( 1, 1, 1, 1 )
+border_color = Color( 1, 1, 1, 1 )
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
+expand_margin_left = 2.0
+expand_margin_right = 2.0
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=10]
 size = 28
+use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -71,9 +131,9 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
 margin_left = 105.0
-margin_top = 11.0
 margin_right = 305.0
-margin_bottom = 549.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 560 )
 custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
@@ -81,38 +141,74 @@ __meta__ = {
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 margin_right = 200.0
-margin_bottom = 419.0
-custom_constants/margin_bottom = 300
+margin_bottom = 203.0
+size_flags_vertical = 3
 
 [node name="GameName" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/MarginContainer"]
+margin_top = 42.0
 margin_right = 200.0
-margin_bottom = 119.0
-custom_fonts/font = SubResource( 1 )
+margin_bottom = 160.0
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0.0980392, 0.588235, 0.00392157, 1 )
 custom_colors/font_outline_modulate = Color( 0.278431, 0.168627, 0.0705882, 1 )
 text = "2048"
 align = 1
 valign = 1
 
-[node name="PlayerNameTextEdit" type="TextEdit" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 439.0
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 223.0
 margin_right = 200.0
-margin_bottom = 479.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 501.0
+size_flags_vertical = 3
+
+[node name="PlayerNameLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 31.0
 custom_fonts/font = SubResource( 2 )
-text = "Player"
+custom_colors/font_color = Color( 0.458824, 0.737255, 0.392157, 1 )
+text = "Nome do jogador"
+align = 1
+
+[node name="PlayerNameTextEdit" type="TextEdit" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 35.0
+margin_right = 200.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 0, 35 )
+custom_fonts/font = SubResource( 3 )
+custom_constants/line_spacing = 0
+text = "Jogador"
 draw_spaces = true
 override_selected_font_color = true
 
-[node name="StartButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 499.0
+[node name="PlayersLabel" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 74.0
 margin_right = 200.0
-margin_bottom = 538.0
+margin_bottom = 105.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0.458824, 0.737255, 0.392157, 1 )
+text = "Lista de jogadores"
+align = 1
+
+[node name="PlayersList" type="ItemList" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 109.0
+margin_right = 200.0
+margin_bottom = 278.0
+rect_min_size = Vector2( 0, 169 )
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color_selected = Color( 0.458824, 0.737255, 0.392157, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+allow_reselect = true
+auto_height = true
+
+[node name="StartButton" type="Button" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 521.0
+margin_right = 200.0
+margin_bottom = 560.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_styles/hover = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0.0980392, 0.588235, 0.00392157, 1 )
 custom_colors/font_color_hover = Color( 0.0980392, 0.588235, 0.00392157, 1 )
 custom_colors/font_color_pressed = Color( 0.101961, 0.588235, 0, 0.745098 )
@@ -120,4 +216,6 @@ text = "START GAME"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="text_changed" from="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/PlayerNameTextEdit" to="." method="_on_PlayerNameTextEdit_text_changed"]
+[connection signal="item_selected" from="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/PlayersList" to="." method="_on_ItemList_item_selected"]
 [connection signal="pressed" from="MarginContainer/CenterContainer/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
